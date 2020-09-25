@@ -8,5 +8,5 @@ Its mainly fousced on building the third party program to commit the repo direct
 You need to do the following two step.
 1. make a file of Address.txt on the Location of 
 
-## Advantages /
+<!-- ## Advantages / -->
 
