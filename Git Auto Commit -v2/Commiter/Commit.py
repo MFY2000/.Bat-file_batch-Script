@@ -16,8 +16,7 @@ def gitCommit(address):
   repo = Repo(address, odbt = GitCmdObjectDB)
 
   files = repo.git.diff(None, name_only=True)
-  for f in files.split('\n'):
-      
+  for f in Status(address):
       repo.git.add(f)
 
   repo.git.commit('-m', 'test commit')
