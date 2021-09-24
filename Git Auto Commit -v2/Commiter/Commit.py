@@ -26,7 +26,7 @@ def push():
 
 def main():
   # print(Status(r"C:\Users\MFY\Desktop\.Bat-file_batch-Script"))
-  print(gitCommit(r"C:\Users\MFY\Desktop\.Bat-file_batch-Script", "MFY auto commit at "+CurrentDate))
+  gitCommit(r"C:\Users\MFY\Desktop\.Bat-file_batch-Script", "MFY auto commit at "+CurrentDate)
 
 
 
