@@ -1,42 +1,29 @@
-import os
-from git import Git , Repo, GitDB
+from git import Repo
 from git.db import GitCmdObjectDB
-from os import path
+
+
+
+def Status(address):
+  repo = Repo(address, odbt = GitCmdObjectDB)
+
+  untrack = [ item for item in repo.untracked_files ]
+  modified = [ item.a_path for item in repo.index.diff(None) ]
+  
+  changes = untrack + modified
+  return changes
+
+
+def isStatus(address):
+  repo = Repo(address, odbt = GitCmdObjectDB)
+  result = repo.untracked_files != [] or repo.index.diff(None) != []
+  return (result)
+
+
 
 
 def main():
-  Status()
+  print(isStatus(r"C:\Users\MFY\Desktop\.Bat-file_batch-Script"))
 
-untrack = []
-modified = []
-
-def Status():
-  repo = Repo(Address(), odbt=GitCmdObjectDB)
-
-  diff = repo.git.diff('HEAD~1..HEAD', name_only=True)
-
-  for i in repo.untracked_files:
-    untrack.append(i)
-
-  changed = [ item.a_path for item in repo.index.diff(None) ]
-
-  for item in repo.index.diff(None):
-    print(item.a_path)
-
-  for i in changed:
-      modified.append(i)
-      
-  print(untrack, modified)
-
-
-
-
-
-
-def Address():
-  url = r"C:\Users\MFY\Desktop\.Bat-file_batch-Script"
-  return url
-    # os.system('cmd /c "cd C:\Users\MFY\Desktop\I-LOVE-GIT-COMMITS"')
 
 
 if __name__ == '__main__':
