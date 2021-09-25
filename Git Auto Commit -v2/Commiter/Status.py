@@ -3,8 +3,7 @@ from git.db import GitCmdObjectDB
 
 
 
-def Status(address):
-  repo = Repo(address, odbt = GitCmdObjectDB)
+def Status(repo):
 
   untrack = [ item for item in repo.untracked_files ]
   modified = [ item.a_path for item in repo.index.diff(None) ]
@@ -13,8 +12,7 @@ def Status(address):
   return changes
 
 
-def isStatus(address):
-  repo = Repo(address, odbt = GitCmdObjectDB)
+def isStatus(repo):
   result = repo.untracked_files != [] or repo.index.diff(None) != []
   return (result)
 
