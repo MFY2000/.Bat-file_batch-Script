@@ -35,7 +35,8 @@ else:
 
 
 def main():
-  is_admin()
+    CurrentDate = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    is_admin()
 
 
 
