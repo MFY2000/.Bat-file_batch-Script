@@ -27,16 +27,21 @@ def is_admin():
     except:
         return False
 
-if is_admin():
-    win32api.SetSystemTime(2020,9,1,21,9,10,10,0)
-else:
-    # Re-run the program with admin rights
-    ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
+def setDate():
+    if is_admin():
+        win32api.SetSystemTime(2020,9,1,21,9,10,10,0)
+    else:
+        # Re-run the program with admin rights
+        ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
 
 
 def main():
-    CurrentDate = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-    is_admin()
+    CurrentDate = datetime.now().strftime("%Y,%m,%d,%H:%M:%S")
+    ShitDate = datetime.now().strftime("2020,9,1,21,9,10,10,0")
+    setDate()
+    # input()
+    # setDate(CurrentDate)
+    print(CurrentDate)
 
 
 
