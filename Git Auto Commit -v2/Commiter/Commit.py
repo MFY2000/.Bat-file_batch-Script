@@ -1,42 +1,50 @@
+
 from datetime import datetime
-from Status import *
-
-CurrentDate = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-
-def gitCommit_Single(repo, message):
-
-  for f in Status(repo):
-    repo.git.add(f)
-    repo.git.commit('-m', message)
+from git.db import GitCmdObjectDB
+from git.repo.base import Repo
+from Status import Status
+from Date import getDate
 
 
-def gitCommit_all(repo, message):
 
-  for f in Status(repo):
-    repo.git.add(f)
+class gitMain:
+  def __init__(self, address,message):
+    self.address = address
+    self.repo = Repo(address, odbt = GitCmdObjectDB)
+    self.message = message
 
-  repo.git.commit('-m', message)
+
+  def gitCommit_Single(self):
+
+    for f in Status(self.repo):
+      self.repo.git.add(f)
+      self.repo.git.commit('-m', self.message)
 
 
-def gitPush(repo):
-  try:
-    origin = repo.remote(name='origin')
-    origin.push()
-  except:
-    print('Some error occured while pushing the code') 
+  def gitCommit_all(self):
 
-def gitMain(address):
-  repo = Repo(address, odbt = GitCmdObjectDB)
-  
-  gitCommit_all(repo, "MFY auto commit at "+CurrentDate)
-  gitPush(repo)
+    for f in Status(self.repo):
+      self.repo.git.add(f)
+
+    self.repo.git.commit('-m', self.message)
+
+
+  def gitPush(self):
+    try:
+      origin = self.repo.remote(name='origin')
+      origin.push()
+    except:
+      print('Some error occured while pushing the code') 
+
+  def main(self):
+    gitMain.gitCommit_all(self)
+    gitMain.gitPush(self)
 
 
 
 def main():
-  gitMain(r"C:\Users\MFY\Desktop\.Bat-file_batch-Script")
-  
-
+  obj = gitMain(r"C:\Users\MFY\Desktop\.Bat-file_batch-Script","MFY auto commit at "+getDate())
+  obj.main()
 
 
 if __name__ == '__main__':

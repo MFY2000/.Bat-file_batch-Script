@@ -1,5 +1,4 @@
 from git import Repo
-from git.db import GitCmdObjectDB
 
 
 

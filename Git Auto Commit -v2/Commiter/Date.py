@@ -34,11 +34,14 @@ def setDate():
         # Re-run the program with admin rights
         ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
 
+def getDate():
+    return datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    
 
 def main():
-    CurrentDate = datetime.now().strftime("%Y,%m,%d,%H:%M:%S")
-    ShitDate = datetime.now().strftime("2020,9,1,21,9,10,10,0")
-    setDate()
+    CurrentDate = datetime.now().strftime("%Y,%m,%d,%H,%M,%S")
+    # ShitDate = datetime.now().strftime("2020,9,1,21,9,10,10,0")
+    # setDate()
     # input()
     # setDate(CurrentDate)
     print(CurrentDate)
