@@ -36,15 +36,19 @@ class gitMain:
     except:
       print('Some error occured while pushing the code') 
 
-  def main(self):
-    gitMain.gitCommit_all(self)
+  def main(self,gateWay):
+    if(gateWay): 
+      gitMain.gitCommit_all(self)
+    else:
+      gitMain.gitCommit_Single(self)
+
     gitMain.gitPush(self)
 
 
 
 def main():
-  obj = gitMain(r"C:\Users\MFY\Desktop\.Bat-file_batch-Script","MFY auto commit at "+getDate())
-  obj.main()
+  obj = gitMain(r"C:\Users\MFY\Desktop\.Bat-file_batch-Script",("MFY auto commit at "+getDate()))
+  obj.main(False)
 
 
 if __name__ == '__main__':
