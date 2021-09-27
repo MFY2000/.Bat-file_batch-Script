@@ -1,7 +1,7 @@
 import ctypes, sys, win32api
 from datetime import datetime
 
-time_tuple = (2012,9,6,0,38,0,0)# Year, # Month, # Day, # Hour, # Minute, # Second, # Millisecond
+time_tuple = (2019,9,7,22,9,10,10,0)# Year, # Month, # Day, # Hour, # Minute, # Second, # Millisecond
 
 def is_admin():
     try:
@@ -11,7 +11,7 @@ def is_admin():
 
 def setDate():
     if is_admin():
-        win32api.SetSystemTime(2012,9,6,0,38,0,0)
+        win32api.SetSystemTime(time_tuple)
     else:
         # Re-run the program with admin rights
         ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
