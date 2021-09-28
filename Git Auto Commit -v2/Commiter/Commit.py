@@ -1,10 +1,10 @@
 
-from datetime import datetime
+from datetime import datetime,timedelta
 from git.db import GitCmdObjectDB
 from git.repo.base import Repo
 from Status import *
 from Date import _Date
-from Main import is_admin
+from Main import *
 
 
 
@@ -48,25 +48,34 @@ class Git:
 
 # 
   def gitChange_date(self,Start,End):
-    NoOfDays_Differ = self.Date.getDaysDiffer(Start,End)
+    print(Start)
+
+    CurrentDate = self.Date.getDate()
+    NoOfDays_Differ = self.Date.getDaysDiffer(End,Start)
     countCommit = 0
+
 
     if self.status.changes == 0:
       return
-    elif NoOfDays_Differ >= self.status.changes.len():
+    elif NoOfDays_Differ >= len(self.status.changes):
       countCommit = 1
-    elif NoOfDays_Differ >= (self.status.changes.len() / 2):
+    elif NoOfDays_Differ >= (len(self.status.changes) / 2):
       countCommit = 2
     else:
-      print("Error need to sort")
+      countCommit = len(self.status.changes) / NoOfDays_Differ
+      # print("Error need to sort")
 
     # _myDate.
     for i in range(NoOfDays_Differ):
-      
-      self.Date.setDate(Start.day+i,Start.month,Start.year)
+      self.Date.setDate(Start.day,Start.month,Start.year)
+      Start = Start + timedelta(days=i)
       
       for j in range(countCommit):
-        gitCommit_Number(self.status.changes[j])
+        self.message = "Auto commits Done: "+self.Date.getDate()
+        Git.gitCommit_Number(self,self.status.changes[j])
+
+    self.Date.setDate(CurrentDate.day,CurrentDate.month,CurrentDate.year)
+    Git.gitPush(self)
 
 
   def run(self,_gateWay):
@@ -80,22 +89,28 @@ class Git:
 
 
 def main():  
-  is_admin()
-  obj = Git(r"C:\Users\MFY\Desktop\.Bat-file_batch-Script",("MFY auto commit at "+_Date().getDate()))
+  if is_admin():
+    
+    obj = Git(r"C:\Users\MFY\Desktop\.Bat-file_batch-Script",("MFY auto commit at "+_Date().getDate()))
+    
+    Start = datetime(2021,9,28)
+    End = datetime(2021,9,30)
 
-  obj.run(False)
+    # Feb 25, 2021 
+    obj.gitChange_date(Start,End)
+
+  else:
+    # Re-run the program with admin rights
+    ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
+    
+
+
+
+  # obj.run(False)
 
   # obj.main(False)
 
 
 if __name__ == '__main__':
   main()
-  # print("hello")
-
-
-    # if is_admin():
-    #     _Date().makeDate(2,15,2004)
-    # else:
-    #      ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
-
   
