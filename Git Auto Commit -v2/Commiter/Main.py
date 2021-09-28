@@ -1,11 +1,21 @@
-import ctypes, sys, win32api
+import ctypes, sys
+
+# def is_admin():
+#     try:
+#         return ctypes.windll.shell32.IsUserAnAdmin()
+#     except:
+#         return False
+    
+
+
+# def runAsAdmin():
+#   if not is_admin():
+#      ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
+#      print(is_admin())
+    
 
 def is_admin():
-  if ctypes.windll.shell32.IsUserAnAdmin():
-    print("Connnected.")
-    # _Date().makeDate(2,15,2004)
-  else:
-    ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
-    
-
-    
+    try:
+        return ctypes.windll.shell32.IsUserAnAdmin()
+    except:
+        return False
