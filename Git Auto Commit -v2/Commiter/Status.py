@@ -1,27 +1,17 @@
-from git import Repo
+class Status:
+  def __init__(self, repo):
+    self.repo = repo
+    self.changes = []
+    status()
 
+  def status(self):
 
+    untrack = [ item for item in self.repo.untracked_files ]
+    modified = [ item.a_path for item in self.repo.index.diff(None) ]
+    
+    self.changes = untrack + modified
 
-def Status(repo):
+  def isStatus(repo):
+    result = repo.untracked_files != [] or repo.index.diff(None) != []
+    return (result)
 
-  untrack = [ item for item in repo.untracked_files ]
-  modified = [ item.a_path for item in repo.index.diff(None) ]
-  
-  changes = untrack + modified
-  return changes
-
-
-def isStatus(repo):
-  result = repo.untracked_files != [] or repo.index.diff(None) != []
-  return (result)
-
-
-
-
-def main():
-  print(isStatus(r"C:\Users\MFY\Desktop\.Bat-file_batch-Script"))
-
-
-
-if __name__ == '__main__':
-    main()
