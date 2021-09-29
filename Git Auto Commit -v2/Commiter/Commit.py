@@ -25,13 +25,10 @@ class Git:
       self.repo.git.commit('-m', self.message)
 
 # to commit number of files at a time
-  def gitCommit_Number(self,number):
+  def gitCommit_Number(self,file):
 
-    changesList = self.status.changes
-
-    for i in range(number):
-      self.repo.git.add(changesList[i])
-      self.repo.git.commit('-m', self.message)
+    self.repo.git.add(file)
+    self.repo.git.commit('-m', self.message)
 
 # to commit all file at a time
   def gitCommit_all(self):
@@ -50,12 +47,25 @@ class Git:
       print('Some error occured while pushing the code') 
 
 # 
-  def gitChange_date(self):
+  def gitChange_date(self,Start,End):
     _myDate = self.Date.getFullDate()
-    # _myDate.
+    NoOfDays_Differ = self.Date.getDaysDiffer(Start,End)
+    countCommit = 0
 
-    self.Date.setDate()
-    gitCommit_Number()
+    if self.status.changes == 0:
+      return
+    elif NoOfDays_Differ >= self.status.changes.len():
+      countCommit = 1
+    elif NoOfDays_Differ >= (self.status.changes.len() / 2):
+      countCommit = 2
+    else:
+      print("Error need to sort")
+
+    # _myDate.
+    for days in range(NoOfDays_Differ):
+      for i in range(countCommit):
+        self.Date.setDate()
+        gitCommit_Number(self.status.changes[i])
 
 
   def main(self,_gateWay):
