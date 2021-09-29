@@ -9,6 +9,7 @@ from Main import is_admin
 
 
 class Git:
+  # 
   def __init__(self, address,message):
     self.address = address
     self.repo = Repo(address, odbt = GitCmdObjectDB)
@@ -72,11 +73,18 @@ def main():
   obj = Git(r"C:\Users\MFY\Desktop\.Bat-file_batch-Script",("MFY auto commit at "+_Date().getDate()))
   obj.main(False)
 
+
+
   # f_date = date(2014, 7, 2)
   # l_date = date(2014, 7, 11)
 
 
 if __name__ == '__main__':
-    main()
+    if is_admin():
+        _Date().makeDate(2,15,2004)
+    else:
+         ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
+
+    
 
 
