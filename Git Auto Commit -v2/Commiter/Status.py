@@ -2,7 +2,7 @@ class Status:
   def __init__(self, repo):
     self.repo = repo
     self.changes = []
-    status()
+    Status.status(self)
 
   def status(self):
 
