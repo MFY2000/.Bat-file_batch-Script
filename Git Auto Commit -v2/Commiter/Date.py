@@ -21,7 +21,7 @@ class _Date:
         
 
 
-def main():
+# def main():
 
     # CurrentDate = datetime.now().strftime("%Y,%m,%d,%H,%M,%S")
     
@@ -29,7 +29,7 @@ def main():
     # print(CurrentDate)
 
 
-def main():
+# def main():
 
 
     # CurrentDate = datetime.now().strftime("%Y,%m,%d,%H,%M,%S")
@@ -38,5 +38,5 @@ def main():
     # print(CurrentDate)
 
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()
