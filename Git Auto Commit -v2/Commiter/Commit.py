@@ -2,7 +2,7 @@
 from datetime import datetime
 from git.db import GitCmdObjectDB
 from git.repo.base import Repo
-from Status import Status
+from Status import *
 from Date import _Date
 from Main import is_admin
 
@@ -48,7 +48,6 @@ class Git:
 
 # 
   def gitChange_date(self,Start,End):
-    _myDate = self.Date.getFullDate()
     NoOfDays_Differ = self.Date.getDaysDiffer(Start,End)
     countCommit = 0
 
@@ -62,39 +61,41 @@ class Git:
       print("Error need to sort")
 
     # _myDate.
-    for days in range(NoOfDays_Differ):
-      for i in range(countCommit):
-        self.Date.setDate()
-        gitCommit_Number(self.status.changes[i])
+    for i in range(NoOfDays_Differ):
+      
+      self.Date.setDate(Start.day+i,Start.month,Start.year)
+      
+      for j in range(countCommit):
+        gitCommit_Number(self.status.changes[j])
 
 
-  def main(self,_gateWay):
+  def run(self,_gateWay):
     if(_gateWay): 
-      Git.gitCommit_all()
+      Git.gitCommit_all(self)
     else:
-      Git.gitCommit_Single()
+      Git.gitCommit_Single(self)
 
     Git.gitPush()
 
 
 
-def main():
+def main():  
   is_admin()
   obj = Git(r"C:\Users\MFY\Desktop\.Bat-file_batch-Script",("MFY auto commit at "+_Date().getDate()))
-  obj.main(False)
 
+  obj.run(False)
 
-
-  # f_date = date(2014, 7, 2)
-  # l_date = date(2014, 7, 11)
+  # obj.main(False)
 
 
 if __name__ == '__main__':
-    if is_admin():
-        _Date().makeDate(2,15,2004)
-    else:
-         ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
-
-    
+  main()
+  # print("hello")
 
 
+    # if is_admin():
+    #     _Date().makeDate(2,15,2004)
+    # else:
+    #      ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
+
+  
