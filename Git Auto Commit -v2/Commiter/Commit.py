@@ -69,14 +69,18 @@ class Git:
     for i in range(NoOfDays_Differ):
       self.Date.setDate(Start.day,Start.month,Start.year)
       Start = Start + timedelta(days=i)
-      
+      print(Start, "Start move to")
       for j in range(countCommit):
         self.message = "Auto commits Done: "+self.Date.getDate()
-        Git.gitCommit_Number(self,self.status.changes[j])
+        print(self.Date.getDate(), "in working")
+        # Git.gitCommit_Number(self,self.status.changes[j])
+        del self.status.changes[j]
 
     self.Date.setDate(CurrentDate.day,CurrentDate.month,CurrentDate.year)
-    Git.gitPush(self)
+    # Git.gitPush(self)
+    print(self.Date.getDate(), "After complete")
 
+    input()
 
   def run(self,_gateWay):
     if(_gateWay): 
