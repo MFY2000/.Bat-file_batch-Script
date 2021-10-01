@@ -102,7 +102,7 @@ class Git:
     else:
       Git.gitCommit_Single(self)
 
-    Git.gitPush()
+    Git.gitPush(self)
 
 
 
