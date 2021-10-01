@@ -22,21 +22,10 @@ class _Date:
 
 
 # def main():
-
     # CurrentDate = datetime.now().strftime("%Y,%m,%d,%H,%M,%S")
     
     # ShitDate = datetime.now().strftime("2020,9,1,21,9,10,10,0")
     # print(CurrentDate)
-
-
-# def main():
-
-
-    # CurrentDate = datetime.now().strftime("%Y,%m,%d,%H,%M,%S")
-    
-    # ShitDate = datetime.now().strftime("2020,9,1,21,9,10,10,0")
-    # print(CurrentDate)
-
 
 # if __name__ == '__main__':
 #     main()
