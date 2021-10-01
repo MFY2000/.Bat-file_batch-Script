@@ -128,11 +128,11 @@ def main():
 
   # obj.main(False)
 
-def run():
-  obj = Git(r"C:\Users\MFY\Desktop\.Bat-file_batch-Script",("MFY auto commit at "+_Date().getDate()))
+def runner():
+  obj = Git(r"C:\Users\MFY\Desktop\Jawan-Pakistan_Mobile-Hybrid-App-Dev-Using-Flutter_",("MFY auto commit at "+_Date().getDate()))
   obj.run(False)
 
 
 if __name__ == '__main__':
-  run()
+  runner()
   
