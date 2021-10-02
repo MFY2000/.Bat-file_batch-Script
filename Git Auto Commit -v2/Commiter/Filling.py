@@ -1,4 +1,4 @@
-from Commit import Git
+from Commit import *
 from Date import _Date
 
 
@@ -9,20 +9,20 @@ class File2Data:
 
   def getData(self):
     
-    for address in self.FileData.readlines():
+    # for address in self.FileData.readlines():
 
-      obj = Git(address)
-      obj.run(False)
+      # obj = Git(address)
+      # obj.run(False)
     
     self.FileData.close()
 
 
 
 def main():
-  obj = File2Data(r"C:\temp\Git Auto commit\Address.txt");
-  obj.getData()
+  # obj = File2Data(r"C:\temp\Git Auto commit\Address.txt");
+  # obj.getData()
   
-  obj = Git(r"C:\Users\MFY\Desktop\I-LOVE-GIT-COMMITS")
+  obj = Git(r"C:\Users\MFY\Desktop\mfy2000")
   obj.run(False)
 
   for i in range(10):
