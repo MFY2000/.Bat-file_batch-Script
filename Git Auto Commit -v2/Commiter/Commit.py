@@ -10,12 +10,12 @@ from Main import *
 
 class Git:
   # 
-  def __init__(self, address,message):
+  def __init__(self, address):
     self.address = address
     self.repo = Repo(address, odbt = GitCmdObjectDB)
-    self.message = message
     self.status = Status(self.repo)
     self.Date = _Date()
+    self.message = self.Date.toString()
 
 # to commit single file at a time
   def gitCommit_Single(self):
@@ -46,7 +46,7 @@ class Git:
     except:
       print('Some error occured while pushing the code') 
 
-# 
+# to puch all the change by date
   def gitChange_date(self,Start,End):
   # Initailize Varrabile 
     CurrentDate = self.Date.getDate()
@@ -94,7 +94,7 @@ class Git:
     print(self.Date.getDate(), "After complete")
     input()
     # Git.gitPush(self)
-    
+#  
 
   def run(self,_gateWay):
     if(_gateWay): 
@@ -129,7 +129,7 @@ def main():
   # obj.main(False)
 
 def runner():
-  obj = Git(r"C:\Users\MFY\Desktop\Jawan-Pakistan_Mobile-Hybrid-App-Dev-Using-Flutter_",("MFY auto commit at "+_Date().getDate()))
+  obj = Git(r"C:\Users\MFY\Desktop\I-LOVE-GIT-COMMITS")
   obj.run(False)
 
 

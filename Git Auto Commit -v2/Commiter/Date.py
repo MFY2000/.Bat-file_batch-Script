@@ -18,8 +18,9 @@ class _Date:
     def getDaysDiffer(self, startDate, endDate):
         dateDiffer = startDate - endDate
         return dateDiffer.days
-        
 
+    def toString(self):    
+        return "MFY auto commit at "+self.getDate()
 
 # def main():
     # CurrentDate = datetime.now().strftime("%Y,%m,%d,%H,%M,%S")
