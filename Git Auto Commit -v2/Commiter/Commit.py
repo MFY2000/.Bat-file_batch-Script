@@ -2,14 +2,15 @@
 from datetime import datetime,timedelta
 from git.db import GitCmdObjectDB
 from git.repo.base import Repo
-from Status import *
+from Status import Status
 from Date import _Date
-from Main import *
+from Main import is_admin
+import ctypes, sys
 
 
 
 class Git:
-  # 
+# Constructor
   def __init__(self, address):
     self.address = address
     self.repo = Repo(address, odbt = GitCmdObjectDB)
@@ -94,8 +95,8 @@ class Git:
     print(self.Date.getDate(), "After complete")
     input()
     # Git.gitPush(self)
-#  
 
+# to run all the function 
   def run(self,_gateWay):
     if(_gateWay): 
       Git.gitCommit_all(self)
@@ -111,8 +112,8 @@ def main():
     
     obj = Git(r"C:\Users\MFY\Desktop\.Bat-file_batch-Script",("MFY auto commit at "+_Date().getDate()))
     
-    Start = datetime(2021,9,25)
-    End = datetime(2021,9,30)
+    Start = datetime(2021,6,27)
+    End = datetime(2021,9,4)
 
     # Feb 25, 2021 
     obj.gitChange_date(Start,End)
