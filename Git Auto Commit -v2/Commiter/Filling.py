@@ -22,7 +22,10 @@ def main():
   obj = File2Data(r"C:\temp\Git Auto commit\Address.txt");
   obj.getData()
   
-  for i in obj.GitList:
+  obj = Git(r"C:\Users\MFY\Desktop\I-LOVE-GIT-COMMITS")
+  obj.run(False)
+
+  for i in range(10):
     print(i)
 
 
