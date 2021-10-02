@@ -129,8 +129,8 @@ def main():
   # obj.main(False)
 
 def runner():
-  obj = Git(r"C:\Users\MFY\Desktop\.Bat-file_batch-Script")
-  obj.run(False)
+  obj = Git(r"C:\Users\MFY\Desktop\Semeste_5_FALL-2021_")
+  # obj.run(False)
 
 
 if __name__ == '__main__':
