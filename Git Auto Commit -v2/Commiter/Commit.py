@@ -129,7 +129,7 @@ def main():
   # obj.main(False)
 
 def runner():
-  obj = Git(r"C:\Users\MFY\Desktop\I-LOVE-GIT-COMMITS")
+  obj = Git(r"C:\Users\MFY\Desktop\.Bat-file_batch-Script")
   obj.run(False)
 
 
