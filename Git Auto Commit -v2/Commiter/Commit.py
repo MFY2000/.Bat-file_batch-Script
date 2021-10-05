@@ -130,7 +130,12 @@ def main():
   # obj.main(False)
 
 def runner():
-  obj = Git(r"C:\Users\MFY\Desktop\Semeste_5_FALL-2021_")
+  obj = Git(r"C:\Users\MFY\Desktop\I-LOVE-GIT-COMMITS_")
+  obj = Git(r"C:\Users\MFY\Desktop\Jawan-Pakistan_Mobile-Hybrid-App-Dev-Using-Flutter_")
+  obj = Git(r"C:\Users\MFY\Desktop\.Bat-file_batch-Script")
+  # obj = Git(r"")
+  # obj = Git(r"")
+  # obj = Git(r"")
   # obj.run(False)
 
 
