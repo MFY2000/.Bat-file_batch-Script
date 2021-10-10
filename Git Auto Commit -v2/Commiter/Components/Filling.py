@@ -1,39 +1,52 @@
-import os
-from Commit import *
-from Date import _Date
-
+import Commit
 
 class File2Data:
   def __init__(self, address):
     self.FileData = open(address,"r+")
-    self.GitList = []
+    self.GitObj = {}
+
+    # to get the data from file
+    self.getData()
 
   def getData(self):
     for address in self.FileData.readlines():    
-      address = self.removebr(address)
+      address = self.removeSymbol(address)
 
       if address != "":
-        self.GitList.append(Git(address))
+        self.GitObj.update(self.getNameFromString(address))
+
     
     self.FileData.close()
 
-  def removebr(self,str):
-    return (str.replace("\n",""))
-  
+  def removeSymbol(self,str):
+      self.Symbol_lst = {"\n":""} #"$":" ","#":" ","[":" ","]":" ","/":" ",".":" ","_\n":"","_":" "
+
+      for replaceStr,newStr in self.Symbol_lst.items():
+        str = str.replace(replaceStr,newStr)
+
+      return str
+
   def getNameFromString(self,str):
     mylist = str.split(chr(92))
-    return({mylist[-1]:str})
+    return({mylist[-1]: {
+      "Address":str,
+      "CommiterRefernce":Commit.Git(str),
+      "NextSchdelus": "",
+      "Type": "Single",
+      "Status":"Runing"
+
+    }})
 
 
-def main():
+def main_Runner():
   obj = File2Data(r"C:\temp\Git Auto commit\Address.txt");
-  obj.getData()
-  
+  # obj.getData()
+  return (obj.GitObj)
 
 
 
 if __name__ == '__main__':
-  main()
+  main_Runner()
   
 
 # myList = [r"C:\Users\MFY\Desktop\Jawan-Pakistan_Mobile-Hybrid-App-Dev-Using-Flutter_",

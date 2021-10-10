@@ -4,7 +4,7 @@ from git.db import GitCmdObjectDB
 from git.repo.base import Repo
 from Status import Status
 from Date import _Date
-from Main import is_admin
+
 import ctypes, sys
 
 
@@ -125,6 +125,12 @@ def main():
 
 
 
+def is_admin():
+    try:
+        return ctypes.windll.shell32.IsUserAnAdmin()
+    except:
+        return False
+
   # obj.run(False)
 
   # obj.main(False)
@@ -141,4 +147,6 @@ def runner():
 
 if __name__ == '__main__':
   runner()
-  
+
+
+
