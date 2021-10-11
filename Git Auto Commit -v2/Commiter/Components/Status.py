@@ -11,7 +11,7 @@ class Status:
     
     self.changes = untrack + modified
 
-  def isStatus(repo):
-    result = repo.untracked_files != [] or repo.index.diff(None) != []
+  def isStatus(self):
+    result = self.repo.untracked_files != [] or self.repo.index.diff(None) != []
     return (result)
 
