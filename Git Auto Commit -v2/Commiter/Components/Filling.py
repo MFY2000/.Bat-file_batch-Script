@@ -1,4 +1,4 @@
-import Commit
+from Components import Commit
 
 class File2Data:
   def __init__(self, address):
@@ -33,7 +33,7 @@ class File2Data:
       "CommiterRefernce":Commit.Git(str),
       "NextSchdelus": "",
       "Type": "Single",
-      "Status":"Runing"
+      "Status":"Running"
 
     }})
 
