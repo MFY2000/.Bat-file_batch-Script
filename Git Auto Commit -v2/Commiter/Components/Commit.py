@@ -2,8 +2,8 @@
 from datetime import datetime,timedelta
 from git.db import GitCmdObjectDB
 from git.repo.base import Repo
-from Status import Status
-from Date import _Date
+from Components import Status
+from Components import Date
 
 import ctypes, sys
 
@@ -14,8 +14,8 @@ class Git:
   def __init__(self, address):
     self.address = address
     self.repo = Repo(address, odbt = GitCmdObjectDB)
-    self.status = Status(self.repo)
-    self.Date = _Date()
+    self.status = Status.Status(self.repo)
+    self.Date = Date._Date()
     self.message = self.Date.toString()
 
 # to commit single file at a time
