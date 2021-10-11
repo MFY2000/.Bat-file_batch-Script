@@ -5,7 +5,7 @@ from tkinter import *
 # from tkinter import tk
 from tkinter import ttk
 
-from Components import Filling
+from Components import Filling,Commit,Date
 
 
 class AutoCommiter:
@@ -17,6 +17,7 @@ class AutoCommiter:
         self.sizes["cord"] = [self.calpostion(0), self.calpostion(1)]
         self.background = PhotoImage(file="images/background.png")
         self.GitRefernce = Filling.main_Runner()
+
 
         self.Display()
         self.initialDashborad()
@@ -34,8 +35,29 @@ class AutoCommiter:
         self.dashborad.title("Git")
     def calpostion(self, iteration):
         return int((self.sizes.get("screen")[iteration] / 2) - (self.sizes.get("App")[iteration] / 2))
+
     def getSize(self, key, i):
         return (self.sizes.get(key)[i])
+
+    def setHeading(self):
+        self.tree.heading('#1', text='S.No',anchor=CENTER)
+        self.tree.column("#1", minwidth=0, width=50, stretch=NO)
+
+        self.tree.heading('#2', text='Folder', anchor=CENTER)
+        self.tree.column("#2", minwidth=0, width=200, stretch=NO)
+
+        self.tree.heading('#3', text='Changes', anchor=CENTER)
+        self.tree.column("#3", minwidth=0, width=80, stretch=NO)
+
+        self.tree.heading('#4', text='Timer', anchor=CENTER)
+        self.tree.column("#4", minwidth=0, width=200, stretch=NO)
+
+        self.tree.heading('#5', text='Operation', anchor=CENTER)
+        self.tree.column("#5", minwidth=0, width=100, stretch=NO)
+
+        self.tree.heading('#6', text='Status', anchor=CENTER)
+        self.tree.column("#6", minwidth=0, width=60, stretch=NO)
+
     def destory(self):
         self.dashborad.destroy
 
@@ -45,53 +67,69 @@ class AutoCommiter:
         self.style.configure("mystyle.Treeview.Heading", font=('Calibri', 13,'bold')) # Modify the font of the headings
         self.style.layout("mystyle.Treeview", [('mystyle.Treeview.treearea', {'sticky': 'nswe'})]) # Remove the borders
 
+    def CommitRepo(self,event):
+        items = self.tree.selection()
+        for item in items:
+            main_dics = list(self.GitRefernce.values())[ (int(item[-1]) - 1) ] # self.GitRefernce.item(item, "CommiterRefernce")
+            myRepo = main_dics["CommiterRefernce"]
+            if myRepo.status.isStatus():
+                myRepo.status.status()
+                chocie = main_dics["Type"] != "Single";
+                myRepo.run(chocie)
+
+
+
+    def operationType(self,event):
+        item = self.tree.selection()
+        for i in item:
+            self.changeState_tree(item,4,["Single", "Multiple"])
+
+    def changeState_tree(self,row,index,value):
+        temp = list(self.tree.item(row, "values"))
+        temp[index] = value[0] if temp[index] != value[0] else value[1]
+        temp = tuple(temp)
+        self.tree.item(row, values=temp)
+
+        # return temp[index] != value;
+
 
     def initialDashborad(self):
-        # self.dashborad.columnconfigure(0, weight=2)
-        columns = ('#1', '#2', '#3',"#4","#5")
+        columns = ('#1', '#2', '#3',"#4","#5",'#6')
         self.treeStyling()
 
-        tree = ttk.Treeview(self.dashborad, columns=columns, show='headings',style="mystyle.Treeview")
+        self.tree = ttk.Treeview(self.dashborad, columns=columns, show='headings',style="mystyle.Treeview")
 
-        # define headings
-        tree.heading('#1', text='S.No',anchor=CENTER)
-        tree.column("#1", minwidth=0, width=50, stretch=NO)
+    # define headings
+        self.setHeading()
+    #
+        n=1
+        for key,value in self.GitRefernce.items():
+            temp = value["CommiterRefernce"];
+            self.tree.insert('', 'end' ,text=f"{n}",
+                             values=(f'{n}', f'{key[0:25]}',f'{len(temp.status.changes)}', f'{value["NextSchdelus"]}',
+                                     f'{value["Type"]}',f'{value["Status"]}'),
 
-        tree.heading('#2', text='Folder', anchor=CENTER)
-        tree.column("#2", minwidth=0, width=150, stretch=NO)
+                             tags = (f'{"odd" if n % 2 == 0 else "even"}'))
+            n = n + 1
 
-        tree.heading('#3', text='Timer', anchor=CENTER)
-        tree.column("#3", minwidth=0, width=150, stretch=NO)
+        self.tree.tag_configure('odd', background='#E8E8E8')
+        self.tree.tag_configure('even', background='#DFDFDF')
 
-        tree.heading('#4', text='Operation', anchor=CENTER)
-        tree.column("#4", minwidth=0, width=150, stretch=NO)
+        self.tree.bind("<<TreeviewSelect>>", self.CommitRepo)
+        self.tree.bind("<Double-1>", self.operationType)
 
-        tree.heading('#5', text='', anchor=CENTER)
-
-
-
-        # generate sample data
-        contacts = []
-
-        for n in len(self.GitRefernce):
-            if n % 2 == 0 :
-                temp = "odd"
-            else:
-                temp = "even"
-
-            tree.insert('', 'end' ,text=f"{n}", values=(f'{n}', f'last {n}', '4:24 am',f"{n*n}"), tags = (f'{temp}'))
+        self.tree.pack(fill=None,expand=0)
+        self.tree.place(in_=self.dashborad,bordermode=OUTSIDE, anchor=CENTER, relx=.5, rely=.5)
 
 
-        tree.tag_configure('odd', background='#E8E8E8')
-        tree.tag_configure('even', background='#DFDFDF')
-
-        tree.pack(fill=None,expand=0)
-        tree.place(in_=self.dashborad,bordermode=OUTSIDE, anchor=CENTER, relx=.5, rely=.5)
 
 if __name__ == '__main__':
     obj = AutoCommiter()
     # obj.newDisplay()
     obj.initialDashborad()
+
+
+
     # main.mainloop()
 
 
