@@ -48,13 +48,21 @@ class Git:
       print('Some error occured while pushing the code') 
 
 # to puch all the change by date
+  def gitUndo(self):
+    
+    for i in range(len(list(self.repo.iter_commits('main')))):
+      lst = list(self.repo.iter_commits('main'))
+      print(i)
+      self.repo.git.revert(lst[i], no_edit = True)
+
+
+
   def gitChange_date(self,Start,End):
   # Initailize Varrabile 
-    CurrentDate = self.Date.getDate()
+    CurrentDate = self.Date.getFullDate().strftime("%Y-%m-%d")
     NoOfDays_Differ = self.Date.getDaysDiffer(End,Start)
     countCommit = 0
   # 
-    
 
   #Used to define the number of commit per day 
     if self.status.changes == 0:
@@ -70,31 +78,25 @@ class Git:
     else:
       NoOfDays_Differ = 0
       countCommit = 0
-      # print("Error need to sort")
-
-  # 
+    
+  
       # countCommit = 1
     # _myDate.
     for i in range(NoOfDays_Differ):
       self.Date.setDate(Start.day,Start.month,Start.year)
-      Start = Start + timedelta(days=i)
-      for j in range(countCommit):
-        # Git.gitCommit_Number(self,self.status.changes[0])
-        self.message = "Auto commits Done: "+self.Date.getDate()
-        print(self.Date.getDate(), "in working")
-        del self.status.changes[0]
-        # print(j,i, " adaad " , countCommit,NoOfDays_Differ)
-        
-    a = input()
       
-
-      # print(Start, "Start move to", i)
-      #   input()
+      for j in range(countCommit):
+        self.gitCommit_Number(self.status.changes[0])
+        self.message = "Auto commits Done: "+self.Date.getDate()
+        del self.status.changes[0]
+      
+      self.gitPush()
+      print(self.Date.getDate())
+      Start = Start + timedelta(days=1)
+  
+    self.Date.setDate(End.day,End.month,End.year)
     
-    self.Date.setDate(CurrentDate.day,CurrentDate.month,CurrentDate.year)
-    print(self.Date.getDate(), "After complete")
-    input()
-    # Git.gitPush(self)
+    
 
 # to run all the function 
   def run(self,_gateWay):
@@ -110,10 +112,10 @@ class Git:
 def main():  
   if is_admin():
     
-    obj = Git(r"C:\Users\MFY\Desktop\.Bat-file_batch-Script",("MFY auto commit at "+_Date().getDate()))
+    obj = Git(r"C:\Users\MFY\Desktop\Semeste_4_Spring-2021_")
     
-    Start = datetime(2021,6,27)
-    End = datetime(2021,9,4)
+    Start = datetime(2021,9,4)
+    End = datetime(2021,10,11)
 
     # Feb 25, 2021 
     obj.gitChange_date(Start,End)
@@ -137,16 +139,18 @@ def is_admin():
 
 def runner():
   # obj = Git(r"C:\Users\MFY\Desktop\I-LOVE-GIT-COMMITS_")
-  obj = Git(r"C:\Users\MFY\Desktop\Jawan-Pakistan_Mobile-Hybrid-App-Dev-Using-Flutter_")
+  obj = Git(r"C:\Users\MFY\Desktop\Semeste_4_Spring-2021_")
   # obj = Git(r"C:\Users\MFY\Desktop\.Bat-file_batch-Script")
   # obj = Git(r"")
   # obj = Git(r"")
   # obj = Git(r"")
-  obj.run(False)
+  # obj.run(False)
+  obj.gitUndo()
 
 
 if __name__ == '__main__':
-  runner()
+  # runner()
+  main()
 
 
 
