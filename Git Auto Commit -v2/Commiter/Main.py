@@ -1,6 +1,6 @@
 import ctypes, sys
+from datetime import datetime,date
 
-# library for bulding ui
 from tkinter import *
 # from tkinter import tk
 from tkinter import ttk
@@ -78,7 +78,6 @@ class AutoCommiter:
                 myRepo.run(chocie)
 
 
-
     def operationType(self,event):
         item = self.tree.selection()
         for i in item:
@@ -94,7 +93,7 @@ class AutoCommiter:
 
 
     def initialDashborad(self):
-        columns = ('#1', '#2', '#3',"#4","#5",'#6')
+        columns = ('#1','#2','#3',"#4","#5",'#6')
         self.treeStyling()
 
         self.tree = ttk.Treeview(self.dashborad, columns=columns, show='headings',style="mystyle.Treeview")
@@ -122,12 +121,16 @@ class AutoCommiter:
         self.tree.place(in_=self.dashborad,bordermode=OUTSIDE, anchor=CENTER, relx=.5, rely=.5)
 
 
+def main():
+    my = date(year=2000, month=12, day=1).weekday()
+    print(my)
+
 
 if __name__ == '__main__':
     obj = AutoCommiter()
-    # obj.newDisplay()
+    # # obj.newDisplay()
     obj.initialDashborad()
-
+    # main()
 
 
     # main.mainloop()
