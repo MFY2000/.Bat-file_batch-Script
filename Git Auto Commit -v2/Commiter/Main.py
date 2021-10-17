@@ -77,6 +77,7 @@ class AutoCommiter:
                 chocie = main_dics["Type"] != "Single";
                 myRepo.run(chocie)
 
+        self.loadRow()
 
     def operationType(self,event):
         item = self.tree.selection()
@@ -101,6 +102,22 @@ class AutoCommiter:
     # define headings
         self.setHeading()
     #
+        self.loadRow()
+        self.tree.tag_configure('odd', background='#E8E8E8')
+        self.tree.tag_configure('even', background='#DFDFDF')
+
+        self.tree.bind("<<TreeviewSelect>>", self.CommitRepo)
+        self.tree.bind("<Double-1>", self.operationType)
+
+        self.tree.pack(fill=None,expand=0)
+        self.tree.place(in_=self.dashborad,bordermode=OUTSIDE, anchor=CENTER, relx=.5, rely=.5)
+
+    def loadRow(self):
+        for i in self.tree.get_children():
+            self.tree.delete(i)
+
+        self.dashborad.update()
+
         n=1
         for key,value in self.GitRefernce.items():
             temp = value["CommiterRefernce"];
@@ -111,14 +128,6 @@ class AutoCommiter:
                              tags = (f'{"odd" if n % 2 == 0 else "even"}'))
             n = n + 1
 
-        self.tree.tag_configure('odd', background='#E8E8E8')
-        self.tree.tag_configure('even', background='#DFDFDF')
-
-        self.tree.bind("<<TreeviewSelect>>", self.CommitRepo)
-        self.tree.bind("<Double-1>", self.operationType)
-
-        self.tree.pack(fill=None,expand=0)
-        self.tree.place(in_=self.dashborad,bordermode=OUTSIDE, anchor=CENTER, relx=.5, rely=.5)
 
 
 def main():
