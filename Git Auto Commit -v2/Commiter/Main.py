@@ -121,6 +121,7 @@ class AutoCommiter:
         n=1
         for key,value in self.GitRefernce.items():
             temp = value["CommiterRefernce"];
+            temp.status.status()
             self.tree.insert('', 'end' ,text=f"{n}",
                              values=(f'{n}', f'{key[0:25]}',f'{len(temp.status.changes)}', f'{value["NextSchdelus"]}',
                                      f'{value["Type"]}',f'{value["Status"]}'),
