@@ -1,4 +1,5 @@
 from datetime import datetime
+import os
 from Components import Filling,Commit,Date
 
 class AutoCommiter:
@@ -16,20 +17,25 @@ class AutoCommiter:
             num = input("Enter number: ")
 
         index = (list(self.git))
-        print(index)
+
         index = index[int(num)] 
-        totalCommit = self.git[index]["CommiterRefernce"].run(False)
-        print(totalCommit)
+        totalCommit = self.git[index]["CommiterRefernce"]
+        if(len(totalCommit.status.changes) != 0):
+            totalCommit = totalCommit.run(False)
+            print(totalCommit)
+        else:
+            print("not Possible")
+
 
     def printing(self):
         print("=========================================================================")
-        print("| S.NO | Name\t\t\t\t| Changes |")
+        print("| S.NO | Name\t\t\t\t| Changes | Operation \t\t|")
         print("-------------------------------------------------------------------------")
         count = 1
 
         for i in self.git:
             temp = self.git[i]["CommiterRefernce"]
-            print(f"|   {self.printProperly(count,3)}| {self.printProperly(i,30)} |    {self.printProperly(len(temp.status.changes),5)}|")
+            print(f"|   {self.printProperly(count,3)}| {self.printProperly(i,30)} |    {self.printProperly(len(temp.status.changes),5)}| Single file Commit  |")
             count += 1
         print("-------------------------------------------------------------------------")
 
@@ -50,7 +56,13 @@ class AutoCommiter:
         self.FileData = open(r"C:\temp\Git Auto commit\Cache\header.mfy","w+")
         self.FileData.write(self.totalCommit+"done on2"+datetime.now())
 
+
 if __name__ == '__main__':
-    cmd = AutoCommiter()
+    
+    i = 0
+    while(True):
+        command = 'cls'
+        os.system(command)
+        AutoCommiter()
     
     # cmd.run();
