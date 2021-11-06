@@ -48,13 +48,3 @@ def main_Runner():
 if __name__ == '__main__':
   main_Runner()
   
-
-# myList = [r"C:\Users\MFY\Desktop\Jawan-Pakistan_Mobile-Hybrid-App-Dev-Using-Flutter_",
-# r"C:\Users\MFY\Desktop\I-LOVE-GIT-COMMITS_",r"C:\Users\MFY\Desktop\.Bat-file_batch-Script",
-# r"C:\Users\MFY\Desktop\Semeste_5_FALL-2021_",
-# r"C:\Users\MFY\Desktop\Semeste_4_Spring-2021_"]
-
-
-# for address in myList:
-#   self.FileData.write(address+"\n")
-  # self.GitList.update(File2Data.getNameFromString(self,r""+address))
