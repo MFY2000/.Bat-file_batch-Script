@@ -1,5 +1,6 @@
 
 from datetime import datetime,timedelta
+import re
 from git.db import GitCmdObjectDB
 from git.repo.base import Repo
 from Components import Status
@@ -20,16 +21,23 @@ class Git:
 
 # to commit single file at a time
   def gitCommit_Single(self):
+    count = 1
 
     for f in self.status.changes:
       self.repo.git.add(f)
       self.repo.git.commit('-m', self.message)
+      print(f"git commit count: {count} Done")
+      count += 1
+
+    return count
 
 # to commit number of files at a time
   def gitCommit_Number(self,file):
 
     self.repo.git.add(file)
     self.repo.git.commit('-m', self.message)
+
+    return 1
 
 # to commit all file at a time
   def gitCommit_all(self):
@@ -44,6 +52,7 @@ class Git:
     try:
       origin = self.repo.remote(name='origin')
       origin.push()
+      print("Git push done all changes")
     except:
       print('Some error occured while pushing the code') 
 
@@ -100,14 +109,15 @@ class Git:
 
 # to run all the function 
   def run(self,_gateWay):
+    count = 0
     if(_gateWay): 
-      Git.gitCommit_all(self)
+      count = Git.gitCommit_all(self)
     else:
-      Git.gitCommit_Single(self)
+      count = Git.gitCommit_Single(self)
 
     Git.gitPush(self)
 
-
+    return count
 
 def main():  
   if is_admin():

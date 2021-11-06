@@ -1,13 +1,23 @@
+from datetime import datetime
 from Components import Filling,Commit,Date
 
 class AutoCommiter:
     def __init__(self):
         self.git = Filling.File2Data(r"C:\temp\Git Auto commit\Address.txt").GitObj
+        self.totalCommit = 0
         self.printing()
+        self.userInput()
+
+
+    def userInput(self):
         num = input("Enter number: ")
-        self.git[num]["CommiterRefernce"].run(False)
+        
+        while(not num.isdecimal):
+            num = input("Enter number: ")
 
-
+        index = (list(self.git))[num] 
+        totalCommit = self.git[index]["CommiterRefernce"].run(False)
+        
 
     def printing(self):
         print("=========================================================================")
@@ -34,7 +44,9 @@ class AutoCommiter:
 
         return toReturn
 
-
+    def fileWrite(self):
+        self.FileData = open(r"C:\temp\Git Auto commit\Cache\header.mfy","w+")
+        self.FileData.write(self.totalCommit+"done on2"+datetime.now())
 
 if __name__ == '__main__':
     cmd = AutoCommiter()
