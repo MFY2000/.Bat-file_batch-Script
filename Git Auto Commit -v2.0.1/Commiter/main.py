@@ -15,9 +15,11 @@ class AutoCommiter:
         while(not num.isdecimal):
             num = input("Enter number: ")
 
-        index = (list(self.git))[num] 
+        index = (list(self.git))
+        print(index)
+        index = index[int(num)] 
         totalCommit = self.git[index]["CommiterRefernce"].run(False)
-        
+        print(totalCommit)
 
     def printing(self):
         print("=========================================================================")
