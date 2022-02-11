@@ -4,7 +4,7 @@ from Components import Filling,Commit,Date
 
 class AutoCommiter:
     def __init__(self):
-        self.git = Filling.File2Data(r"C:\temp\Git Auto commit\Address.txt").GitObj
+        self.git = Filling.File2Data(r"C:\Users\DarkJoker\Desktop\Git-Auto-Commit\Address.txt").GitObj
         self.totalCommit = 0
         self.printing()
         self.userInput()
@@ -53,7 +53,7 @@ class AutoCommiter:
         return toReturn
 
     def fileWrite(self):
-        self.FileData = open(r"C:\temp\Git Auto commit\Cache\header.mfy","w+")
+        self.FileData = open(r"C:\Users\DarkJoker\Desktop\Git-Auto-Commit\header.mfy","w+")
         self.FileData.write(self.totalCommit+"done on2"+datetime.now())
 
 
