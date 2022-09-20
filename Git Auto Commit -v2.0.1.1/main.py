@@ -26,12 +26,15 @@ class Committer:
 
 
     def CommitCode(self):
-        file = open((self.address + "/.gitattributes"), "a+")
+
 
         for f in range(self.difference):
             self.currentDate.setDate()
 
+            file = open((self.address + "/.gitattributes"), "a+")
             file.write(f"git commit of day {f} on {self.currentDate.toString()} has been Done. \n")
+            file.close()
+
             [self.repo.git.add(f) for f in self.status()]
 
             self.message += self.currentDate.toString()
@@ -39,7 +42,7 @@ class Committer:
 
             self.currentDate.incraseDateCount()
 
-        file.close()
+            print("Commit Done")
 
 
 class DateTime:
@@ -60,6 +63,7 @@ class DateTime:
         day = self.date.day
         weekday = self.date.weekday()
         win32api.SetSystemTime(year, month, weekday, day, tt.hour, tt.minute, tt.second, (tt.microsecond // 1000))
+        print(f"Date is Change now {self.toString()}", end='')
 
     def weekDay(self, year, month, day):
         offset = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334]
