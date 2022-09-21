@@ -13,7 +13,7 @@ data = list()
 my_game = None
 
 def readFile():
-    with open(r"../../log.csv", 'r') as file:
+    with open(r"../../../log.csv", 'r') as file:
         csv_file = csv.DictReader(file, fieldnames=None, restkey=None, restval=None, dialect='excel')
         i = 1
         for row in csv_file:
@@ -37,7 +37,7 @@ def populateTable(index,data):
 
 
 def uploadOldData():
-    with open(r'../../log.csv', 'w', newline='') as file:
+    with open(r'../../../log.csv', 'w', newline='') as file:
         fieldnames = ['Name', 'Address', "last Commit", "total Commit"]
         writer = csv.DictWriter(file, fieldnames=fieldnames)
 
