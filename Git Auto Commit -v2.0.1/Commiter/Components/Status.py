@@ -5,7 +5,6 @@ class Status:
     Status.status(self)
 
   def status(self):
-
     untrack = [ item for item in self.repo.untracked_files ]
     modified = [ item.a_path for item in self.repo.index.diff(None) ]
     
