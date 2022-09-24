@@ -30,7 +30,7 @@ class File2Data:
     mylist = str.split(chr(92))
     return({mylist[-1]: {
       "Address":str,
-      "CommiterRefernce":Commit.Git(str),
+      "CommiterRefernce": Commit.Git(str),
       "NextSchdelus": "",
       "Type": "Single",
       "Status":"Running"
