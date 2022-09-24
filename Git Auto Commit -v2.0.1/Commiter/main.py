@@ -35,7 +35,8 @@ class AutoCommiter:
 
         for i in self.git:
             temp = self.git[i]["CommiterRefernce"]
-            print(f"|   {self.printProperly(count,3)}| {self.printProperly(i,30)} |    {self.printProperly(len(temp.status.changes),5)}| Single file Commit  |")
+            print(f"|   {self.printProperly(count,3)}| {self.printProperly(i,30)}"
+                  f" |    {self.printProperly(len(temp.status.changes),5)}| Single file Commit  |")
             count += 1
         print("-------------------------------------------------------------------------")
 
@@ -47,7 +48,6 @@ class AutoCommiter:
         if(loopCounter > lenght):
             toReturn = name[0:lenght]
         else:
-            
             toReturn = name + (" " * (lenght - loopCounter))
 
         return toReturn
