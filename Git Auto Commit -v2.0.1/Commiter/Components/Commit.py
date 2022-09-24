@@ -121,7 +121,6 @@ class Git:
 
 def main():  
   if is_admin():
-    
     obj = Git(r"C:\Users\MFY\Desktop\Semeste_4_Spring-2021_")
     
     Start = datetime(2021,9,4)
